@@ -1,1 +1,1 @@
-# mirai-website
+# Mirai Control Plane
