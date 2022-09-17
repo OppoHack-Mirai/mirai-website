@@ -1,0 +1,8 @@
+#userDropdown:hover ~ #img-dropdown {
+    display: block!important;
+    top: 60px;
+}
+#img-dropdown:hover {
+    display: block!important;
+    top: 60px;
+}
