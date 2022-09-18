@@ -1,6 +1,6 @@
 import React from "react";
 import { showHomeScreen } from "../functions";
-import { getHTMLFileSizeInBits, hashFile, readBinaryFile, addFile } from "../MiraiAPI"
+import { getHash2, getHTMLFileSizeInBits, hashFile, readBinaryFile, addFile } from "../MiraiAPI"
 
 class UploadFile extends React.Component {
 
@@ -21,13 +21,19 @@ class UploadFile extends React.Component {
         if(this.state.file) {
             let size_bits = getHTMLFileSizeInBits(this.state.file);
             let file_name = this.state.file.name;
-            let binary = await readBinaryFile(this.state.file);
+            // let binary = await readBinaryFile(this.state.file);
             console.log('binary');
-            console.log(binary);
-            let hash = hashFile(binary);
+            // console.log(binary);
+            var original = this.state.file;
+
+            let hash = await getHash2(original);
             console.log('hash');
             console.log(hash);
-            let file_id = await addFile(file_name, size_bits, hash, this.state.file);
+            // const cloneFile = new File([binary], original.name, {
+            //     type: original.type,
+            //     lastModified: original.lastModified,
+            // });
+            let file_id = await addFile(file_name, size_bits, hash, original, null);
             if(file_id) {
                 showHomeScreen();
             }

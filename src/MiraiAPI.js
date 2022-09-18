@@ -1,4 +1,4 @@
-import { doc, deleteDoc, GeoPoint,  addDoc, collection } from "firebase/firestore";
+import { doc, deleteDoc, GeoPoint, updateDoc, addDoc, collection, FieldValue, arrayUnion } from "firebase/firestore";
 import VALUES from "./VALUES";
 import fetch from 'node-fetch';
 import FormData from 'form-data';
@@ -19,7 +19,13 @@ export async function addNode(userId, protocol, hostname, port, latitude, longit
         last_heartbeat_time: -1,
         location: new GeoPoint(latitude, longitude),
     });
-    return res.id;
+
+    const nodeId = res.id;
+    const res2 = await updateDoc(doc(VALUES.db, "users", userId), {
+        'nodes': arrayUnion(doc(VALUES.db, 'nodes', nodeId))
+    });
+
+    return nodeId;
 }
 
 export async function updateNode(nodeId, data) {
@@ -47,7 +53,7 @@ export function epochTimeSecondsToDate(seconds) {
     return month + "/" + day + "/" + year + " at " + hour + ":" + minute + ":" + second;
 }
 
-export function uploadFileToNode(file_id, protocol, hostname, port, htmlFile, file_name) {
+export function uploadFileToNode(file_id, protocol, hostname, port, htmlFile, file_name, fileArray) {
     const url = protocol + '://' + hostname + ':' + port + '/accept_new_file/' + file_id;
 
     // const body = new FormData();
@@ -57,7 +63,9 @@ export function uploadFileToNode(file_id, protocol, hostname, port, htmlFile, fi
     //     method: 'POST'
     // });
     var formData = new FormData();
+    console.log(htmlFile);
     formData.append("file", htmlFile, file_name);
+    console.log(formData);
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url);
@@ -65,6 +73,19 @@ export function uploadFileToNode(file_id, protocol, hostname, port, htmlFile, fi
 
     return 1;
 }
+
+export async function getHash2(blob, algo = "SHA-256") {
+    // convert your Blob to an ArrayBuffer
+    // could also use a FileRedaer for this for browsers that don't support Response API
+    const buf = await new Response(blob).arrayBuffer();
+    const hash = await crypto.subtle.digest(algo, buf);
+    let result = '';
+    const view = new DataView(hash);
+    for (let i = 0; i < hash.byteLength; i += 4) {
+       result += view.getUint32(i).toString(16).padStart(2, '0');
+    }
+    return result;
+  }
 
 export function hashFile(binaryFile) {
     return CryptoJS.SHA256(arrayBufferToWordArray(binaryFile)).toString(CryptoJS.enc.Hex);
@@ -104,7 +125,7 @@ export function readBinaryFile(file) {
 //     return hexstring;
 //   }
 
-export async function addFile(file_name, size_bits, hash, htmlFile) {
+export async function addFile(file_name, size_bits, hash, htmlFile, fileArray) {
     const params = new URLSearchParams();
     params.append('real_name', file_name);
     params.append('size_bits', size_bits);
@@ -118,7 +139,11 @@ export async function addFile(file_name, size_bits, hash, htmlFile) {
     let nodes_to_upload = data['upload_to_nodes'];
     console.log(data)
     nodes_to_upload.forEach(function(node) {
-        uploadFileToNode(file_id, node['protocol'], node['hostname'], node['port'], htmlFile, file_name);
+        uploadFileToNode(file_id, node['protocol'], node['hostname'], node['port'], htmlFile, file_name, fileArray);
+    });
+
+    const res2 = await updateDoc(doc(VALUES.db, "users", VALUES.user.uid), {
+        'files': arrayUnion(doc(VALUES.db, 'files', file_id))
     });
 
     return file_id;
