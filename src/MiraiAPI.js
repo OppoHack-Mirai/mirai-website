@@ -47,18 +47,23 @@ export function epochTimeSecondsToDate(seconds) {
     return month + "/" + day + "/" + year + " at " + hour + ":" + minute + ":" + second;
 }
 
-export function uploadFileToNode(file_id, protocol, hostname, port, file_raw_blob, file_name) {
+export function uploadFileToNode(file_id, protocol, hostname, port, htmlFile, file_name) {
     const url = protocol + '://' + hostname + ':' + port + '/accept_new_file/' + file_id;
 
-    const formData = new FormData();
-    formData.append('file', file_raw_blob, file_name);
+    // const body = new FormData();
+    // body.append('file', binary, file_name);
 
-    const res = fetch(url, {
-        method: 'POST',
-        body: formData
-    });
+    // const res = fetch(url, {body,
+    //     method: 'POST'
+    // });
+    var formData = new FormData();
+    formData.append("file", htmlFile, file_name);
 
-    return res;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    xhr.send(formData);
+
+    return 1;
 }
 
 export function hashFile(binaryFile) {
@@ -99,7 +104,7 @@ export function readBinaryFile(file) {
 //     return hexstring;
 //   }
 
-export async function addFile(file_name, size_bits, hash, file_raw_blob) {
+export async function addFile(file_name, size_bits, hash, htmlFile) {
     const params = new URLSearchParams();
     params.append('real_name', file_name);
     params.append('size_bits', size_bits);
@@ -113,7 +118,7 @@ export async function addFile(file_name, size_bits, hash, file_raw_blob) {
     let nodes_to_upload = data['upload_to_nodes'];
     console.log(data)
     nodes_to_upload.forEach(function(node) {
-        uploadFileToNode(file_id, node['protocol'], node['hostname'], node['port'], file_raw_blob, file_name);
+        uploadFileToNode(file_id, node['protocol'], node['hostname'], node['port'], htmlFile, file_name);
     });
 
     return file_id;

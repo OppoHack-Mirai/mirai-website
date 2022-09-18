@@ -27,7 +27,7 @@ class UploadFile extends React.Component {
             let hash = hashFile(binary);
             console.log('hash');
             console.log(hash);
-            let file_id = await addFile(file_name, size_bits, hash, new Blob([binary]));
+            let file_id = await addFile(file_name, size_bits, hash, this.state.file);
             if(file_id) {
                 showHomeScreen();
             }
