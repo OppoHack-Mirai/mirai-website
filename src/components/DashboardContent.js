@@ -120,7 +120,7 @@ class DashboardContent extends React.Component {
                                                 </div>
                                                 <div className="row no-gutters align-items-center">
                                                     <div className="col-auto">
-                                                        <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">{VALUES.userData.type == "Admin" ? VALUES.userData.nodes_running: VALUES.userData.files.length}</div>
+                                                        <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">{VALUES.userData.type == "Admin" ? VALUES.userData.nodes.length: VALUES.userData.files.length}</div>
                                                     </div>
                                                 </div>
                                             </div>
