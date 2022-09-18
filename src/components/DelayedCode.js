@@ -9,6 +9,7 @@ import Nodes from "./Nodes";
 import Settings from "./Settings";
 import Register from "./Register";
 import Login from "./Login";
+import AddNode from "./AddNode";
 
 class DelayedCode extends React.Component {
 
@@ -29,8 +30,7 @@ class DelayedCode extends React.Component {
             renderContainer = <Router>
                 <Routes>
                     <Route exact path="/" element={<Dashboard />} />
-                    <Route exact path="/nodes" element={<Nodes />} />
-                    <Route exact path="/settings" element={<Settings />} />
+                    <Route exact path="/addnode" element={<AddNode />} />
                     <Route exact path="/login" element={<Login />} />
                     <Route exact path="/register" element={<Register />} />
                 </Routes>

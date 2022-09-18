@@ -1,9 +1,16 @@
-
+import React from "react";
+import Sidebar from "./Sidebar";
+import AddNodeContent from "./AddNodeContent";
 
 class AddNode extends React.Component {
 
-    constructor(props) {
-        super(props);
+    render() {
+       return ( 
+            <div id="wrapper">
+                <Sidebar active="dashboard" />
+                <AddNodeContent />
+            </div>
+       );
     }
 
 }

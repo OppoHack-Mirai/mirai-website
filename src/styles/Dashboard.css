@@ -1,0 +1,16 @@
+.chart-pie canvas {
+    height: 100%!important;
+    display: inline-block!important;
+    width: auto!important;
+}
+.chart-pie {
+    text-align: center;
+}
+.chart-area canvas {
+    height: 100%!important;
+    display: inline-block!important;
+    width: auto!important;
+}
+.chart-area {
+    text-align: center;
+}

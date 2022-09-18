@@ -3,4 +3,5 @@ export default {
     user: null, // firebase user
     server: "http:// /new-file",
     userData: null,
+    CNC_SERVER: 'http://cdn.yale26.com/'
 };

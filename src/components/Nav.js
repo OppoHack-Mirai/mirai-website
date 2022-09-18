@@ -36,7 +36,7 @@ class Nav extends React.Component {
                     <li className="nav-item dropdown no-arrow">
                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span className="mr-2 d-none d-lg-inline text-gray-600 small">{VALUES.userData != null ? VALUES.userData.first + " " + VALUES.userData.last : ""}</span>
+                            <span className="mr-2 d-none d-lg-inline text-gray-600 small">{VALUES.userData != null ? VALUES.userData.name  : ""}</span>
                             {VALUES.user.photoURL != null ? <img src={VALUES.user.photoURL} className="img-profile rounded-circle" /> : <i className='material-icons'>account_circle</i>}
                         </a>
                         <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"

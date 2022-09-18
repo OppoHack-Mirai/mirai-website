@@ -32,7 +32,7 @@ class Sidebar extends React.Component {
 
                 <hr className="sidebar-divider" />
 
-                <div className="sidebar-heading" >
+                {/* <div className="sidebar-heading" >
                     Interface
                 </div>
 
@@ -48,7 +48,7 @@ class Sidebar extends React.Component {
                         <i className="fas fa-fw fa-cog"></i>
                         <span>Settings</span>
                     </Link>
-                </li>
+                </li> */}
 
             </ul>
         );

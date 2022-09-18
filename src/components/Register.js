@@ -26,7 +26,7 @@ class Register extends React.Component {
                     const user = userCredential.user;
                     VALUES.user = user;  
                     // create user in firestore
-                    await setDoc(doc(VALUES.db, "users", user.uid), {"time": Timestamp.now(), "email": user.email, type: this.state.type == 0 ? "User" : "Admin", files: [], earnings: 0, earningsYearly: 0, nodes_running: 0, dead_nodes: 0 });
+                    await setDoc(doc(VALUES.db, "users", user.uid), {"time": Timestamp.now(), "name": this.state.first + " " + this.state.last, "email": user.email, type: this.state.type == 0 ? "User" : "Admin", files: [], earnings: 0, earningsYearly: 0, nodes_running: 0, dead_nodes: 0, nodes: [] });
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -42,7 +42,7 @@ class Register extends React.Component {
             .then(async (result) => {
                 const user = result.user;
                 // create user in firestore
-                await setDoc(doc(VALUES.db, "users", user.uid), {"time": Timestamp.now(), "email": user.email, type: this.state.type == 0 ? "User" : "Admin", files: [], earnings: 0, earningsYearly: 0, nodes_running: 0, dead_nodes: 0 });
+                await setDoc(doc(VALUES.db, "users", user.uid), {"time": Timestamp.now(), "name": user.displayName, "email": user.email, type: this.state.type == 0 ? "User" : "Admin", files: [], earnings: 0, earningsYearly: 0, nodes_running: 0, dead_nodes: 0, nodes: [] });
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
