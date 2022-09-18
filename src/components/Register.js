@@ -72,25 +72,25 @@ class Register extends React.Component {
                                     <form className="user">
                                         <div className="form-group row">
                                             <div className="col-sm-6 mb-3 mb-sm-0">
-                                                <input value={this.state.first} type="text" className="form-control form-control-user" id="exampleFirstName"
+                                                <input value={this.state.first} onChange={e => this.setState({first: e.target.value})} type="text" className="form-control form-control-user" id="exampleFirstName"
                                                     placeholder="First Name"/>
                                             </div>
                                             <div className="col-sm-6">
-                                                <input value={this.state.last} type="text" className="form-control form-control-user" id="exampleLastName"
+                                                <input value={this.state.last} onChange={e => this.setState({last: e.target.value})} type="text" className="form-control form-control-user" id="exampleLastName"
                                                     placeholder="Last Name"/>
                                             </div>
                                         </div>
                                         <div className="form-group">
-                                            <input value={this.state.email} type="email" className="form-control form-control-user" id="exampleInputEmail"
+                                            <input value={this.state.email} onChange={e => this.setState({email: e.target.value})} type="email" className="form-control form-control-user" id="exampleInputEmail"
                                                 placeholder="Email Address"/>
                                         </div>
                                         <div className="form-group row">
                                             <div className="col-sm-6 mb-3 mb-sm-0">
-                                                <input value={this.state.password} type="password" className="form-control form-control-user"
+                                                <input value={this.state.password} onChange={e => this.setState({password: e.target.value})} type="password" className="form-control form-control-user"
                                                     id="exampleInputPassword" placeholder="Password"/>
                                             </div>
                                             <div className="col-sm-6">
-                                                <input value={this.state.password2} type="password" className="form-control form-control-user"
+                                                <input value={this.state.password2} onChange={e => this.setState({password2: e.target.value})} type="password" className="form-control form-control-user"
                                                     id="exampleRepeatPassword" placeholder="Repeat Password"/>
                                             </div>
                                         </div>

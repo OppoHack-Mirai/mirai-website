@@ -60,12 +60,12 @@ class Login extends React.Component {
                                             </div>
                                             <form className="user">
                                                 <div className="form-group">
-                                                    <input value={this.state.email} type="email" className="form-control form-control-user"
+                                                    <input value={this.state.email} onChange={e => this.setState({email: e.target.value})} type="email" className="form-control form-control-user"
                                                         id="exampleInputEmail" aria-describedby="emailHelp"
                                                         placeholder="Enter Email Address..." />
                                                 </div>
                                                 <div className="form-group">
-                                                    <input value={this.state.password} type="password" className="form-control form-control-user"
+                                                    <input value={this.state.password} onChange={e => this.setState({password: e.target.value})} type="password" className="form-control form-control-user"
                                                         id="exampleInputPassword" placeholder="Password" />
                                                 </div>
                                                 <div className="form-group">
