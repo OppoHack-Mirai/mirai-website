@@ -72,7 +72,7 @@ class DashboardContent extends React.Component {
                         <div className="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
                             <Link to="/addnode" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-plus fa-sm text-white-50"></i>{VALUES.userData.type == "Admin" ? "Add Node" : "Add File"}</Link>
+                                class="fas fa-plus fa-sm text-white-50"></i> {VALUES.userData.type == "Admin" ? "Add Node" : "Add File"}</Link>
                         </div>
     
                         <div className="row">
